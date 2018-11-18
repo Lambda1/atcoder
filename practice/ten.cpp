@@ -1,35 +1,26 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <algorithm>
 
-std::string t[] = {"dream","dreamer","erase","eraser"};
-
-bool recv(std::string ans,std::string m)
+void EraseAll(std::string *origin,std::string str)
 {
-	if(ans.length() < m.length()) return false;
-	if(ans == m) return true;
-	if(recv(ans,m+t[0])) return true;
-	if(recv(ans,m+t[1])) return true;
-	if(recv(ans,m+t[2])) return true;
-	if(recv(ans,m+t[3])) return true;
-	return false;
+	int pos;
+	while((pos = origin->find(str)) != std::string::npos)
+		origin->replace(pos,str.length(),"");
 }
 
 int main(int argc,char *argv[])
 {
 	std::string s;
 	std::cin >> s;
-	int i;
-
-	if(s[0] == 'd') i = 0;
-	else i = 2;
-
-	for(int j = 0;j < 2;j++)
-	if(recv(s,t[i+j])){
-			std::cout << "YES" << std::endl;
-			return 0;
-	}
 	
-	std::cout << "NO" << std::endl;
+	EraseAll(&s,"eraser");
+	EraseAll(&s,"erase");
+	EraseAll(&s,"dreamer");
+	EraseAll(&s,"dream");
+
+	if(s.length()) std::cout << "NO" << std::endl;
+	else std::cout << "YES" << std::endl;
+	
 	return 0;
 }
