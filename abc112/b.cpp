@@ -13,9 +13,9 @@ int main(int argc,char *argv[])
 	for(int i = 0;i < n;i++) std::cin >> c[i] >> t[i];
 
 	int min = 0;
-	for(int i = 1;i < n;i++) if(c[i] < c[min] && t[i] < T) min = i;
+	for(int i = 1;i < n;i++) if(c[i] < c[min] && t[i] <= T) min = i;
 
-	if(t[min] < T)
+	if(t[min] <= T)
 		std::cout << c[min] << std::endl;
 	else std::cout << "TLE" << std::endl;
 	

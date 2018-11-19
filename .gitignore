@@ -1,4 +1,5 @@
 *.exe
+*.out
 *.swp
 test*
 *.stackdump
