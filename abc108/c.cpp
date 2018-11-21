@@ -7,10 +7,19 @@
 
 int main(int argc,char *argv[])
 {
-	int n,s;
-	std::cin >> n >> s;
+	long n,k;
+	std::cin >> n >> k;
 
-	int d = 0;
+	long d = 0,f = 0;
+	for(int i = 1;i <= n;i++){
+		if(!(i%k)) f++;
+		if(!(k%2) && (i%k) == (k/2)) d++;
+	}
+
+	std::cout << d*d*d + f*f*f << std::endl;
+/*
+	int s = k;
+	d = 0;
 	for(int i = 1;i <= n;i++)
 		for(int j = 1;j <= n;j++)
 			for(int k = 1;k <= n;k++){
@@ -21,6 +30,6 @@ int main(int argc,char *argv[])
 			}
 
 	std::cout << d << std::endl;
-
+*/
 	return 0;
 }
