@@ -2,17 +2,17 @@ Atcoder
 ====
 
 Overview
-Atcoderの練習, 参加した際のプログラム.
+Atcoder practice, participation in the program.
 
 ## Description
-Atcoderのプログラムです.  
-記述言語: C/C++
+Atcoder is a program.  
+  
+Programming Language:  
+C/C++
 
 ## Requirement
 gcc/g++
 
-## Install
-ダウンロードのみ.
 
 ## Licence
 MIT
