@@ -2,7 +2,7 @@ Atcoder
 ====
 
 Overview
-Atcoder practice, participation in the program.　　
+Atcoder practice, participation in the program.  
 [atcoder](https://atcoder.jp/users/lambda00)  
 
 ## Description
