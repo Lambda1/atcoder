@@ -5,16 +5,24 @@
 #include <cmath>
 #include <map>
 
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/graphviz.hpp>
-#include <boost/graph/graph_utility.hpp>
-
-typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS, boost::no_property, boost::property<boost::edge_weight_t,int>> Graph;
-typedef std::pair<int,int> Edge;
+template <class T>
+class Edge
+{
+	T m_to;
+	T m_weight;
+	public:
+	Edge() : m_to(0), m_weight(0){}
+	Edge(const T to,const T weight) : m_to(to), m_weight(weight) {}
+	~Edge(){}
+	inline void Init(const T to,const T weight){ m_to = to, m_weight = weight; }
+	inline T GetTo() const { return m_to; }
+	inline T GetWeight() const { return m_weight; }
+};
+using Graph = std::vector<std::vector<Edge<int>>>;
 
 int main(int argc,char *argv[])
 {
-	long int n,m,t;
+	int n,m,t;
 	std::cin >> n >> m >> t;
 
 	std::vector<int> money;
@@ -24,21 +32,24 @@ int main(int argc,char *argv[])
 		std::cin >> tmp;
 		money.push_back(tmp);
 	}
-	
-	std::string node_name = "";
-	std::vector<Edge> edges;
-	std::vector<int> weights;
+
+	Graph g(n);
 	for(int i = 0;i < m;i++)
 	{
-		int a, b, c;
+		int a,b,c;
 		std::cin >> a >> b >> c;
-		edges.push_back(std::make_pair(a, b));
-		weights.push_back(c);
-		node_name += std::to_string(i+1);
+		g[a-1].push_back(Edge<int>(b,c));
 	}
-	
-	Graph g(edges.begin(), edges.end(), weights.begin(), n);
-	boost::print_graph(g, node_name.c_str());
+
+	for(int i = 0;i < n;i++)
+	{
+		std::cout << i << " -->";
+		for(auto first = g[i].begin();first != g[i].end();first++)
+		{
+			std::cout << " " << first->GetTo();
+		}
+		std::cout << std::endl;
+	}
 
 	return 0;
 }

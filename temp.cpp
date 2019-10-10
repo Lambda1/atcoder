@@ -5,38 +5,24 @@
 #include <cmath>
 #include <map>
 
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/graphviz.hpp>
-#include <boost/graph/graph_utility.hpp>
-
-typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS> Graph;
-typedef std::pair<int,int> Edge;
-
-enum class NODE : int
+/* 辺 */
+template <class T>
+class Edge
 {
-	A,
-	B,
-	C,
-	D,
-	E,
-	SIZE
+	T m_to;     /* 行き先 */
+	T m_weight; /* 重み */
+	public:
+	Edge() : m_to(0), m_weight(0){}
+	Edge(const T to,const T weight) : m_to(to), m_weight(weight) {}
+	~Edge(){}
+	inline void Init(const T to,const T weight){ m_to = to, m_weight = weight; }
+	inline T GetTo() const { return m_to; }
+	inline T GetWeight() const { return m_weight; }
 };
-
-const std::string node_name = "ABCDE";
+/* グラフ */
+using Graph = std::vector<std::vector<Edge<int>>>;
 
 int main(int argc,char *argv[])
 {
-	Graph g;
-
-	std::map<int, Graph::vertex_descriptor> desc;
-	for(int i = 0;i < static_cast<int>(NODE::SIZE);i++)
-	{
-		desc[i] = boost::add_vertex(g);
-	}
-	
-	boost::add_edge(desc[static_cast<int>(NODE::A)], desc[static_cast<int>(NODE::B)], g);
-
-	boost::print_graph(g, node_name.c_str());
-
 	return 0;
 }
