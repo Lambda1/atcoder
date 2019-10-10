@@ -26,11 +26,15 @@ const std::string node_name = "ABCDE";
 
 int main(int argc,char *argv[])
 {
-	const std::vector<Edge> edges =
+	Graph g;
+
+	std::map<int, Graph::vertex_descriptor> desc;
+	for(int i = 0;i < static_cast<int>(NODE::SIZE);i++)
 	{
-		{static_cast<int>(NODE::A), static_cast<int>(NODE::B)}, {static_cast<int>(NODE::A), static_cast<int>(NODE::C)}, {static_cast<int>(NODE::A), static_cast<int>(NODE::D)}
-	};
-	const Graph g(edges.begin(), edges.end(), static_cast<int>(NODE::SIZE));
+		desc[i] = boost::add_vertex(g);
+	}
+	
+	boost::add_edge(desc[static_cast<int>(NODE::A)], desc[static_cast<int>(NODE::B)], g);
 
 	boost::print_graph(g, node_name.c_str());
 
