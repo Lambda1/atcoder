@@ -1,79 +1,86 @@
 #include <iostream>
 #include <vector>
 
-const int table[] =
-{
-	-1, 7, 3, -1, -1, -1,
-	7,-1, 3,  8,  5, -1,
-	3, 3,-1,  1,  4, -1,
-	-1, 8, 1, -1,  1,  3,
-	-1, 5, 4,  1, -1,  9,
-	-1,-1,-1,  3,  9, -1
-};
-
-	template<class T>
-inline void PrintGraph(T *Graph,const int &n,const int &m)
+template<class T>
+void Printer(const T *data,const int &n,const int &m)
 {
 	for(int i = 0;i < n;i++)
 	{
-		for(int j = 0;j < m;j++)
-			std::cout << Graph[i*n+j] << " ";
+		for(int j = 0;j < m;j++) std::cout << data[i*n+j] << " ";
 		std::cout << std::endl;
 	}
 }
-	template<class T>
-inline void PrintGraph(const T &Graph,const int &n,const int &m)
+template<class T>
+void Printer(const T *data,const int &n)
 {
-	for(int i = 0;i < n;i++)
-	{
-		for(int j = 0;j < m;j++)
-			std::cout << Graph[i*n+j] << " ";
-		std::cout << std::endl;
-	}
+	for(int i = 0;i < n;i++) std::cout << data[i] << " ";
+	std::cout << std::endl;
 }
 
-int DFS(int *Graph,std::vector<bool> &seen,const int &i,const int &num)
+/* 隣接行列(最深部がゴールver) */
+template<class T>
+std::vector<T> dijkstra(const std::vector<T> &graph,const int &n)
 {
-	int total = 0;
-	for(int j = i;j < num;j++)
+	constexpr int MAX_COST = 99999;
+	constexpr int ERR_COST = -1;
+	std::vector<T> weight;
+	for(int i = 0;i < n;i++) weight.push_back(static_cast<T>(MAX_COST));
+	weight[0] = 0;
+
+	for(int i = 0;i < n;i++)
 	{
-		if(Graph[i*num+j] == -1 || i == j || seen[i*num+j]) continue;
-		seen[i*num+j] = seen[j*num+i] = true;
-		total = Graph[i*num+j];
-		PrintGraph<std::vector<bool>>(seen, num, num);
-		std::cout << std::endl;
-		int right = DFS(Graph,seen,j,num) + total;
-		int left  = DFS(Graph,seen,j+1,num) + total;
-		if(right < left) total = right;
-		else total = left;
-		std::cout << (char)('a' + i) << std::endl;
-		std::cout << "R " << right << std::endl;
-		std::cout << "L " << left << std::endl;
-		break;
+		for(int j = 0;j < n;j++)
+		{
+			if(graph[i*n+j] == static_cast<T>(ERR_COST)) continue;
+			
+			if((weight[i] + graph[i*n+j]) < weight[j])
+			{
+				weight[j] = weight[i] + graph[i*n+j];
+				if(j < i){ i = j-1; break; }
+			}
+		}
 	}
-	return total;
+	return weight;
 }
 
 int main(int argc,char *argv[])
 {
-	int num;
-	std::cout << "INPUT VERTEX: ";
-	std::cin >> num;
+	int n,m,t;
+	std::cin >> n >> m >> t;
 
-	int *Graph = new int[num*num];
-
-	std::vector<bool> seen(num*num);
-	for(int i = 0;i < num*num;i++)
+	int max = 0;
+	std::vector<int> weight(n);
+	for(int i = 0;i < n;i++)
 	{
-		Graph[i] = table[i];
-		seen[i] = false;
+		std::cin >> weight[i];
+		if(weight[max] < weight[i]) max = i;
 	}
 
-	PrintGraph<int>(Graph,num,num);
-	std::cout << DFS(Graph,seen,0,num) << std::endl;
-	PrintGraph<std::vector<bool>>(seen, num, num);
+	std::vector<int> array,reverse;
+	for(int i = 0;i < n*n;i++) array.push_back(-1), reverse.push_back(-1);
 
-	delete[] Graph;
+	for(int i = 0;i < m;i++)
+	{
+		int a,b,c;
+		std::cin >> a >> b >> c;
 
+		array[(a-1)*n+(b-1)] = c;
+		reverse[(b-1)*n+(a-1)] = c;
+	}
+
+	//Printer<int>(dijkstra<int>(array,n).data(),n);
+	Printer<int>(dijkstra<int>(reverse,n).data(),n);
+	/*
+	std::vector<int> data_x =
+	{
+		-1, 10,  5, -1, -1, -1,
+		10, -1,  2,  8, -1, -1,
+		 5,  2, -1, -1, 10, -1,
+		-1,  8, -1, -1, -1,  8,
+		-1, -1, 10, -1, -1, 10,
+		-1, -1, -1,  8, 10, -1
+	};
+	Printer<int>(dijkstra<int>(data_x,6).data(),6);
+	*/
 	return 0;
 }
