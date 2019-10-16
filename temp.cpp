@@ -4,23 +4,20 @@
 #include <algorithm>
 #include <cmath>
 #include <map>
+#include <queue>
 
-/* 辺 */
-template <class T>
-class Edge
+using lint = long long int;
+using Graph = std::vector<std::vector<lint>>;
+
+template<class T>
+struct edge
 {
-	T m_to;     /* 行き先 */
-	T m_weight; /* 重み */
-	public:
-	Edge() : m_to(0), m_weight(0){}
-	Edge(const T to,const T weight) : m_to(to), m_weight(weight) {}
-	~Edge(){}
-	inline void Init(const T to,const T weight){ m_to = to, m_weight = weight; }
-	inline T GetTo() const { return m_to; }
-	inline T GetWeight() const { return m_weight; }
+	T dist;
+	lint to;
+	edge(){}
+	edge(const T &a_dist,const lint &a_to) : dist(a_dist), to(a_to) {}
+	~edge(){}
 };
-/* グラフ */
-using Graph = std::vector<std::vector<Edge<int>>>;
 
 int main(int argc,char *argv[])
 {
