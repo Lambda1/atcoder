@@ -47,12 +47,16 @@ int main(int argc,char *argv[])
 	}
 
 	warshall_floyd<lint>(graph);
-
+	lint true_max = MAX_COST;
 	for(int i = 0;i < n;i++)
 	{
-		for(int j = 0;j < n;j++) std::cout << graph[i*n+j] << " ";
-		std::cout << std::endl;
+		lint max = 0;
+		for(int j = 0;j < n;j++)
+			max = (max < graph[i*n+j]) ? graph[i*n+j] : max;
+		true_max = true_max < max ? true_max : max;
 	}
+
+	std::cout << true_max << std::endl;
 
 	return 0;
 }
