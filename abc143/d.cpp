@@ -19,6 +19,21 @@ struct edge
 	~edge(){}
 };
 
+template<class T>
+T my_binary_search(const int &min,const int &max,const T &key,const std::vector<T> &data)
+{
+	const int mid = (max - min) >> 1;
+
+	std::cout << mid << std::endl;
+
+	if(data[mid] == key) return mid;
+	if(data[mid] > key)  return my_binary_search<T>(min,mid,key,data);
+
+	if(min == max) return -1;
+	
+	return -1;
+}
+
 int main(int argc,char *argv[])
 {
 	lint n;
@@ -26,20 +41,12 @@ int main(int argc,char *argv[])
 
 	std::vector<lint> l(n);
 	for(int i = 0;i < n;i++) std::cin >> l[i];
+	//std::sort(l.begin(),l.end(),std::greater<lint>());
+	std::sort(l.begin(),l.end());
 
-	lint num = 0;
-	for(lint a = 0;a < n;a++)
-	{
-		for(lint b = a+1;b < n;b++)
-		{
-			for(lint c = b+1;c < n;c++)
-			{
-				if(l[a] < l[b]+l[c] && l[b] < l[c]+l[a] && l[c] < l[a]+l[b]) num++;
-			}
-		}
-	}
+	for(int i = 0;i < n;i++) std::cout << l[i] << std::endl;
 
-	std::cout << num << std::endl;
+	std::cout << my_binary_search<lint>(0,n,704,l) << std::endl;
 
 	return 0;
 }
