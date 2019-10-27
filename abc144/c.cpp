@@ -24,20 +24,10 @@ int main(int argc,char *argv[])
 	lint n;
 	std::cin >> n;
 
-	std::string s;
-	std::cin >> s;
-	
-	lint num = 1;
-	char check = s[0];
-	for(int i = 1;i < n;i++)
-	{
-		if(check != s[i]){
-			check = s[i];
-			num++;
-		}
-	}
+	lint i;
+	for(i = sqrt(n);i > 0;i--) if(n%i == 0) break;
 
-	std::cout << num << std::endl;
-
+	lint j = n/i;
+	std::cout << i-1 + j-1 << std::endl;
 	return 0;
 }

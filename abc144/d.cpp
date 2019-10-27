@@ -21,23 +21,13 @@ struct edge
 
 int main(int argc,char *argv[])
 {
-	lint n;
-	std::cin >> n;
+	int a,b,x;
+	std::cin >> a >> b >> x;
 
-	std::string s;
-	std::cin >> s;
-	
-	lint num = 1;
-	char check = s[0];
-	for(int i = 1;i < n;i++)
-	{
-		if(check != s[i]){
-			check = s[i];
-			num++;
-		}
-	}
+	std::cout << a*a*b << std::endl;
 
-	std::cout << num << std::endl;
+	double rate = static_cast<double>(x)/(a*a*b);
+	std::cout << rate << std::endl;
 
 	return 0;
 }

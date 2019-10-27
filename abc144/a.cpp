@@ -9,22 +9,13 @@
 using lint = long long int;
 using Graph = std::vector<std::vector<lint>>;
 
-template<class T>
-struct edge
-{
-	T dist;
-	lint to;
-	edge(){}
-	edge(const T &a_dist,const lint &a_to) : dist(a_dist), to(a_to) {}
-	~edge(){}
-};
-
 int main(int argc,char *argv[])
 {
-	lint a,b;
+	int a,b;
 	std::cin >> a >> b;
 
-	std::cout << ((a-b*2 < 0) ? 0 : a-b*2) << std::endl;
+	if(a < 1 || a > 9 || b < 1 || b > 9) std::cout << -1 << std::endl;
+	else std::cout << a*b << std::endl;
 
 	return 0;
 }

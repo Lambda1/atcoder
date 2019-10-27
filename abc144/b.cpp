@@ -21,23 +21,14 @@ struct edge
 
 int main(int argc,char *argv[])
 {
-	lint n;
+	int n;
 	std::cin >> n;
 
-	std::string s;
-	std::cin >> s;
+	int i;
+	for(i = 9;i > 0;i--) if(n%i == 0) break;
 	
-	lint num = 1;
-	char check = s[0];
-	for(int i = 1;i < n;i++)
-	{
-		if(check != s[i]){
-			check = s[i];
-			num++;
-		}
-	}
-
-	std::cout << num << std::endl;
-
+	if(n/i < 10) std::cout << "Yes" << std::endl;
+	else std::cout << "No" << std::endl;
+	
 	return 0;
 }
