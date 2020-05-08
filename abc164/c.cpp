@@ -18,12 +18,23 @@ int main(int argc,char *argv[])
 	{
 		std::string str;
 		std::cin >> str;
-
-		auto result = std::find(s.begin(), s.end(), str);
-		if (result == s.end()) { s.emplace_back(str); }
+		s.emplace_back(str);
 	}
 
-	std::cout << s.size() << std::endl;
+	std::sort(s.begin(), s.end());
+	
+	ll ans = 1;
+	ll idx = 0;
+	for (ll i = 1;i < n;i++)
+	{
+		if (s[idx] != s[i])
+		{
+			idx = i;
+			++ans;
+		}
+	}
+
+	std::cout << ans << std::endl;
 
 	return 0;
 }
