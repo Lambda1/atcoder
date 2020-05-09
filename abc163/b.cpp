@@ -9,14 +9,20 @@
 
 using ll = long long int;
 
-constexpr double pi = 3.1415926535;
-
 int main(int argc,char *argv[])
 {
-	double r;
-	std::cin >> r;
+	ll n,m;
+	std::cin >> n >> m;
+	
+	ll a;
+	for(ll i = 0;i < m;++i)
+	{
+		std::cin >> a;
+		n -= a;
+	}
 
-	std::cout << std::fixed << std::setprecision(15) << 2.0 * pi * r << std::endl;
+	if (n < 0) { std::cout << "-1" << std::endl; }
+	else { std::cout << n << std::endl; }
 
 	return 0;
 }
