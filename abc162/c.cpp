@@ -15,9 +15,13 @@ ul gcd(ul a,ul b) { return (!b) ? a : gcd(b,a%b); }
 
 int main(int argc,char *argv[])
 {
-	ul a,b;
-	std::cin >> a >> b;
-	std::cout << gcd(a, b) << std::endl;
+	ul k;
+	std::cin >> k;
+	
+	ul ans = 0;
+	for (ul a = 1;a <= k;++a){ for (ul b = 1;b <= k;++b) { for (ul c = 1;c <= k;++c) { ans += gcd(gcd(a,b),c); } } }
+
+	std::cout << ans << std::endl;
 
 	return 0;
 }
