@@ -12,5 +12,17 @@ using ul = unsigned long long int;
 
 int main(int argc,char *argv[])
 {
+	ul n;
+	std::cin >> n;
+
+	ul ans = 0;
+	for (ul i = 1;i <= n;++i)
+	{
+		if (!(i%3) || !(i%5)) { continue; }
+		ans += i;
+	}
+
+	std::cout << ans << std::endl;
+
 	return 0;
 }
