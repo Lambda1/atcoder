@@ -6,6 +6,7 @@
 #include <cmath>
 #include <map>
 #include <queue>
+#include <bitset>
 
 using ll = long long int;
 using ul = unsigned long long int;
@@ -25,16 +26,30 @@ int main(int argc,char *argv[])
 		for (ll j = 0;j < m;++j) { std::cin >> a[i*m+j]; }
 	}
 
-	ll ans = 99999999;
-	for(ll i = 0;i < n;++i)
+	ll min = 9999999;
+	for(ll i = 0;i < (1<<n);++i)
 	{
+		ll ans = 0;
+		std::bitset<12> s(i);
 		std::vector<ll> r(m,0);
-		for(ll j = 0;j < m;++j)
+		for (ll j = 0;j < n;++j)
 		{
-			std::cout << a[i*m+j] << " ";
+			if (s.test(j))
+			{
+				ans += c[j];
+				bool flag = true;
+				for (ll k = 0;k < m;++k)
+				{
+					r[k] += a[j*m+k];
+					if (r[k] < x) { flag = false; }
+				}
+				if (flag) { if (ans < min) { min = ans; } }
+			}
 		}
-		std::cout << std::endl;
 	}
+
+	if (min == 9999999) { std::cout << -1 << std::endl; }
+	else { std::cout << min << std::endl; }
 
 	return 0;
 }
