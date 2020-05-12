@@ -11,8 +11,14 @@
 using ll = long long int;
 using ul = unsigned long long int;
 
-// GCD: a > b
-ul gcd(ul a,ul b) { return (!b) ? a : gcd(b,a%b); }
+namespace lamlib
+{
+	// Absolute
+	template<class T>
+		inline T abs(const T &a){ return (a>0) ? a : -a; }
+	// GCD: a > b
+	ul gcd(ul a,ul b) { return (!b) ? a : gcd(b,a%b); }
+}
 
 int main(int argc,char *argv[])
 {
