@@ -24,39 +24,21 @@ int main(int argc,char *argv[])
 	ll n;
 	std::cin >> n;
 
-	std::vector<std::string> s;
+	std::map<std::string,ll> s;
 	for(ll i = 0;i < n;++i)
 	{
 		std::string tmp;
 		std::cin >> tmp;
-		s.emplace_back(tmp);
+		s[tmp]++;
 	}
 
-	std::sort(s.begin(),s.end());
+	ll max = 0;
+	for(auto itr = s.begin();itr != s.end();++itr)
+		if(max < itr->second) max = itr->second;
 
-	ll ans = 0;
-	for(ll i = 0;i < n;++i)
-	{
-		ll ans_tmp = 0;
-		std::string str = s[i];
-		for(ll j = i+1;j < n;++j)
-		{
-			if(str != s[j]) break;
-			++ans_tmp;
-		}
-		if(ans_tmp > ans) ans = ans_tmp;
-	}
-	for(ll i = 0;i < n;++i)
-	{
-		ll count = 0;
-		std::string str = s[i];
-		for(ll j = i+1;j < n;++j)
-		{
-			if(str != s[j]) break;
-			++count;
-		}
-		if(count == ans) std::cout << str << std::endl;
-	}
+	for(auto itr = s.begin();itr != s.end();++itr)
+		if(max == itr->second) std::cout << itr->first << std::endl;
+
 
 	return 0;
 }
