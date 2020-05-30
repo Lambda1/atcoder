@@ -30,5 +30,22 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ul n;
+	std::cin >> n;
+	
+	std::vector<std::string> s(n);
+	for(ll i = 0;i < n;++i) std::cin >> s[i];
+
+	ul ans = 0;
+	std::unordered_map<std::string, ll> m;
+	for(ll i = 0;i < n;++i)
+	{
+		std::sort(s[i].begin(),s[i].end());
+		if(m[s[i]] > 0) ans += m[s[i]];
+		++m[s[i]];
+	}
+
+	std::cout << ans << std::endl;
+
 	return 0;
 }
