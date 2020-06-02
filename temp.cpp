@@ -30,6 +30,8 @@ namespace lamlib
 	inline ul same_char_count(const std::string s,const char &ch){ return std::count(std::cbegin(s),std::cend(s),ch); }
 }
 
+// std::cout << std::fixed << std::setprecision(15) << std::endl;
+
 int main(int argc,char *argv[])
 {
 	return 0;
