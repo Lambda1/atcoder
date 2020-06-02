@@ -10,6 +10,7 @@
 #include <bitset>
 #include <limits>
 
+using ld = long double;
 using ll = long long int;
 using ul = unsigned long long int;
 
@@ -36,7 +37,20 @@ int main(int argc,char *argv[])
 	std::vector<int> x(n,0), y(n,0);
 	for(int i = 0;i < n;++i) std::cin >> x[i] >> y[i];
 
-	
+
+	auto expr = [](const ld &x1, const ld &y1,const ld &x2, const ld &y2){ return std::sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)); };
+
+	ld ans = 0;
+	for(int i = 0;i < n;++i)
+	{
+		for(int j = i+1;j < n;++j)
+		{
+			auto tmp = expr(static_cast<ld>(x[i]),static_cast<ld>(y[i]),static_cast<ld>(x[j]),static_cast<ld>(y[j]));
+			if (tmp > ans) ans = tmp;
+		}
+	}
+
+	std::cout << std::fixed << std::setprecision(15) << ans << std::endl;
 
 	return 0;
 }

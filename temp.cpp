@@ -22,7 +22,7 @@ namespace lamlib
 	/* math */
 	template<class T> inline T abs(const T &a){ return (a>0) ? a : -a; }
 	ul inline digit(const ul &num){ return static_cast<ul>(std::log10(num+epsilon))+1; }
-	
+
 	/* algorithm */
 	ul gcd(const ul &a,const ul &b) { return (!b) ? a : gcd(b,a%b); } // NOTE: a > b
 	
