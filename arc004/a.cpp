@@ -30,5 +30,11 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	int n;
+	std::cin >> n;
+
+	std::vector<int> x(n,0), y(n,0);
+	for(int i = 0;i < n;++i) std::cin >> x[i] >> y[i];
+
 	return 0;
 }

@@ -24,7 +24,7 @@ namespace lamlib
 	ul inline digit(const ul &num){ return static_cast<ul>(std::log10(num+epsilon))+1; }
 	
 	/* algorithm */
-	ul gcd(ul a,ul b) { return (!b) ? a : gcd(b,a%b); } // NOTE: a > b
+	ul gcd(const ul &a,const ul &b) { return (!b) ? a : gcd(b,a%b); } // NOTE: a > b
 	
 	/* string */
 	inline ul same_char_count(const std::string s,const char &ch){ return std::count(std::cbegin(s),std::cend(s),ch); }
