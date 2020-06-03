@@ -1,21 +1,24 @@
-Atcoder
+Competitive programming
 ====
 
 Overview
-Atcoder practice, participation in the program.  
+Competitive programming repository  
 [atcoder](https://atcoder.jp/users/lambda00)  
+[yukicoder](https://yukicoder.me/users/11300)  
 
 ## Description
-Atcoder is a program.  
+競技プログラミング用のリポジトリ  
+基本的には, 競プロ専用.  
   
-Programming Language:  
-C/C++
+## Programming Language  
+main: C++  
+sub:  C, lua  
 
 ## Requirement
-gcc/g++
+main: g++, clang++  
+sub: gcc, lua/luac  
 
-
-## Licence
+## Licence  
 MIT
 
 ## Author
