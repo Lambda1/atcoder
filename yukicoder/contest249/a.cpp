@@ -34,5 +34,15 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	int a,b;
+	std::cin >> a >> b;
+
+	if(a == b) std::cout << a*2-1 << std::endl;
+	else
+	{
+		int min = (a>b)?b:a;
+		std::cout << min*2 << std::endl;
+	}
+
 	return 0;
 }
