@@ -25,7 +25,19 @@ namespace lamlib
 
 	/* algorithm */
 	ul gcd(const ul &a,const ul &b) { return (!b) ? a : gcd(b,a%b); } // NOTE: a > b
-	
+	std::vector<bool> eratosthenes(const ul &n)
+	{
+		std::vector<bool> prime_candidate(n,true);
+		prime_candidate[0] = prime_candidate[1] = false;
+		const ul max_n = static_cast<ul>(std::sqrt(n));
+		for(ul i = 2;i < max_n;++i)
+		{
+			if(!prime_candidate[i]) continue;
+			for(ul j = 2;i*j < n;++j) prime_candidate[i*j] = false;
+		}
+		return prime_candidate;
+	}
+
 	/* string */
 	inline ul same_char_count(const std::string s,const char &ch){ return std::count(std::cbegin(s),std::cend(s),ch); }
 }
@@ -34,5 +46,13 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll n,k,x,y;
+	std::cin >> n >> k >> x >> y;
+
+	std::vector<ll> a(n,0);
+	for(ll i = 0;i < n;++i) std::cin >> a[i];
+
+	std::sort(a.begin(),a.end(),std::less<>());
+
 	return 0;
 }
