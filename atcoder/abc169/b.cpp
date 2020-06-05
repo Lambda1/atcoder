@@ -40,14 +40,22 @@ int main(int argc,char *argv[])
 	std::vector<ul> a(n,0);
 	for(ll i = 0;i < n;++i) std::cin >> a[i];
 
+	std::sort(a.begin(),a.end(),std::less<>());
+	if(a[0] == 0) { std::cout << 0 << std::endl; return 0; }
+
+	constexpr ul x = 1000000000000000000;
 	ul ans = 1;
 	for(ll i = 0;i < n;++i)
 	{
-		ans *= a[i];
+		if(a[i] <= x/ans) ans *= a[i];
+		else
+		{
+			std::cout << -1 << std::endl;
+			return 0;
+		}
 	}
 
-	if(ans <= 1e+18) std::cout << ans << std::endl;
-	else std::cout << -1 << std::endl;
+	std::cout << ans << std::endl;
 	
 	return 0;
 }
