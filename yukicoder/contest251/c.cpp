@@ -66,7 +66,6 @@ int main(int argc,char *argv[])
 		if(a[i] != tmp) ans += b[tmp];
 		std::cout << a[i] << ":" << tmp << " " << (a[i]^tmp) << std::endl;
 	}
-
 	std::cout << ans/2 << std::endl;
 
 	return 0;
