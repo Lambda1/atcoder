@@ -63,8 +63,8 @@ int main(int argc,char *argv[])
 	for(ll i = 0;i < n;++i)
 	{
 		const ll tmp = (a[i]^x);
-		if(a[i] != tmp) ans += b[tmp];
-		std::cout << a[i] << ":" << tmp << " " << (a[i]^tmp) << std::endl;
+		ans += b[tmp];
+		if(x == 0) --ans;
 	}
 	std::cout << ans/2 << std::endl;
 
