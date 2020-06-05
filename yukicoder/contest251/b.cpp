@@ -46,13 +46,13 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
-	std::string c;
-	std::cin >> c;
+	ll n,k,x,y;
+	std::cin >> n >> k >> x >> y;
 
-	ll ans = 0;
-	for(int i = 1;i < c.size();++i) if(c[i] != '0') ++ans;
+	std::vector<ll> a(n,0);
+	for(ll i = 0;i < n;++i) std::cin >> a[i];
 
-	std::cout << ans << std::endl;
+	std::sort(a.begin(),a.end(),std::less<>());
 
 	return 0;
 }
