@@ -50,9 +50,37 @@ int main(int argc,char *argv[])
 	std::cin >> n >> k >> x >> y;
 
 	std::vector<ll> a(n,0);
-	for(ll i = 0;i < n;++i) std::cin >> a[i];
+	std::vector<ll> need_recover(n,0);
+	for(ll i = 0;i < n;++i)
+	{
+		std::cin >> a[i];
+		ll cost = (a[i]-1)/k;
+		need_recover[i] = ((a[i]-1)%k != 0) ? cost+1 : cost;
+	}
+	std::sort(need_recover.begin(),need_recover.end(),std::less<>());
+	
+	ll ans = 0;
+	ll cast_count = 0;
+	ll m = n;
+	for(ll i = 0;i < n;++i)
+	{
+		need_recover[i] -= cast_count;
+		--m;
+		if(need_recover[i] <= 0) continue;
+		// ベホマラー
+		if(y < (m+1)*x)
+		{
+			ans += need_recover[i]*y;
+			cast_count += need_recover[i];
+		}
+		// ベホイミ
+		else
+		{
+			ans += need_recover[i]*x;
+		}
+	}
 
-	std::sort(a.begin(),a.end(),std::less<>());
+	std::cout << ans << std::endl;
 
 	return 0;
 }
