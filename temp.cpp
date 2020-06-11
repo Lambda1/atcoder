@@ -30,8 +30,7 @@ namespace lamlib
 	{
 		std::vector<bool> prime_candidate(n,true);
 		prime_candidate[0] = prime_candidate[1] = false;
-		const ul max_n = static_cast<ul>(std::sqrt(n));
-		for(ul i = 2;i <= max_n;++i)
+		for(ul i = 2;i*i < n;++i)
 		{
 			if(!prime_candidate[i]) continue;
 			for(ul j = 2;i*j < n;++j) prime_candidate[i*j] = false;
@@ -98,7 +97,8 @@ int main(int argc,char *argv[])
 	auto x = lamlib::prime_factorization_trial(n);
 	for(auto itr = x.begin();itr != x.end();++itr)
 	{
-		std::cout << *itr << std::endl;
+		//std::cout << *itr << std::endl;
 	}
+
 	return 0;
 }
