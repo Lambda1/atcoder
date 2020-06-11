@@ -9,6 +9,7 @@
 #include <queue>
 #include <bitset>
 #include <limits>
+#include <numeric>
 
 using ld = long double;
 using ll = long long int;
@@ -22,9 +23,9 @@ namespace lamlib
 	/* math */
 	template<class T> inline T abs(const T &a){ return (a>0) ? a : -a; }
 	ul inline digit(const ul &num){ return static_cast<ul>(std::log10(num+epsilon))+1; }
-
+	
 	/* algorithm */
-	ul gcd(const ul &a,const ul &b) { return (!b) ? a : gcd(b,a%b); } // NOTE: a > b
+	ul gcd(const ul &a,const ul &b) { return (!b) ? a : gcd(b,a%b); }
 	std::vector<bool> eratosthenes(const ul &n)
 	{
 		std::vector<bool> prime_candidate(n,true);
@@ -37,6 +38,50 @@ namespace lamlib
 		}
 		return prime_candidate;
 	}
+	ll rho_method(const ll &n)
+	{
+		auto f = [&](const ll &xi){ return (xi*xi+1)%n; };
+		ll x = 2, y = 2, d = 1;
+		while(d == 1)
+		{
+			x = f(x);
+			y = f(f(y));
+			d = lamlib::gcd(lamlib::abs(x-y),n);
+		}
+		return d;
+	}
+	std::vector<ll> prime_factorization_trial(const ll &n)
+	{
+		ll num = n;
+		std::vector<ll> prime;
+		for(ll i = 2;i*i < n;++i)
+		{
+			while((num%i) == 0)
+			{
+				prime.emplace_back(i);
+				num /= i;
+			}
+		}
+		if(num > 1) prime.emplace_back(num);
+		return prime;
+	}
+	std::vector<ll> prime_factorization_rho(ll n)
+	{
+		std::vector<ll> prime;
+		while(n != 1)
+		{
+			ll tmp = lamlib::rho_method(n);
+			// falied to search
+			if(tmp == n)
+			{
+				break;
+			}
+			prime.emplace_back(tmp);
+			n/=tmp;
+		}
+		return prime;
+	}
+
 
 	/* string */
 	inline ul same_char_count(const std::string s,const char &ch){ return std::count(std::cbegin(s),std::cend(s),ch); }
@@ -46,5 +91,14 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll n;
+	std::cin >> n;
+
+	//auto x = lamlib::prime_factorization_rho(n);
+	auto x = lamlib::prime_factorization_trial(n);
+	for(auto itr = x.begin();itr != x.end();++itr)
+	{
+		std::cout << *itr << std::endl;
+	}
 	return 0;
 }

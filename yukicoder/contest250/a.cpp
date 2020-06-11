@@ -52,12 +52,14 @@ int main(int argc,char *argv[])
 	ll n;
 	std::cin >> n;
 
-	auto prime = lamlib::eratosthenes(n+1);
-
-	for(int i = 0;i < n;++i)
+	for(ll i = 1e+5;i >= 0;--i)
 	{
-		if(prime[i]) std::cout << i << std::endl;
+		if(n%(i*i) == 0)
+		{
+			std::cout << i << " " << n/(i*i) << std::endl;
+			break;
+		}
 	}
-	
+
 	return 0;
 }
