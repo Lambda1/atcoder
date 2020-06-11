@@ -33,7 +33,10 @@ namespace lamlib
 		for(ul i = 2;i <= max_n;++i)
 		{
 			if(!prime_candidate[i]) continue;
-			for(ul j = 2;i*j < n;++j) prime_candidate[i*j] = false;
+			for(ul j = 2;i*j < n;++j)
+			{
+				prime_candidate[i*j] = false;
+			}
 		}
 		return prime_candidate;
 	}
@@ -46,5 +49,15 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll n;
+	std::cin >> n;
+
+	auto prime = lamlib::eratosthenes(n+1);
+
+	for(int i = 0;i < n;++i)
+	{
+		if(prime[i]) std::cout << i << std::endl;
+	}
+	
 	return 0;
 }
