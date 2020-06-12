@@ -74,30 +74,10 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
-	std::string p;
+	ld p;
 	std::cin >> p;
 
-	ll count = p.size()-2;
-	ll denominator = std::pow(10, count);
-	ll numerator = std::stof(p) * denominator;
-
-	if(numerator == 0){ std::cout << 0 << std::endl; return 0; }
-
-	auto de = lamlib::prime_factorization_trial(denominator);
-	auto nu = lamlib::prime_factorization_trial(numerator);
-
-	for(ll i = 0;i < de.size();++i)
-	{
-		for(ll j = 0;j < nu.size();++j)
-		{
-			if(de[i] == nu[j]) { nu[j] = 1; break; }
-		}
-	}
-
-	ll ans = 1;
-	for(auto itr = nu.begin();itr != nu.end();++itr) ans *= (*itr);
-
-	std::cout << ans << std::endl;
+	std::cout << p / (1-p) << std::endl;
 
 	return 0;
 }
