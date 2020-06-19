@@ -79,14 +79,14 @@ int main(int argc,char *argv[])
 
 	std::vector<ll> a(n,0);
 	for(ll i = 0;i < n;++i) std::cin >> a[i];
-
-	ll ans = -1;
-	do
-	{
-		ll tmp = a[0]^a[1];
-		for(ll i = 2;i < n;++i) tmp ^= (a[i-1]^a[i]);
-		if (tmp > ans) ans = tmp;
-	}while(std::next_permutation(a.begin(), a.end()));
+	
+	ll ans = a[0]^a[1];
+	for(ll i = 0;i < n;++i)
+		for(ll j = i+1;j < n;++j)
+		{
+			ll tmp = a[i]^a[j];
+			if(tmp > ans) ans = tmp;
+		}
 
 	std::cout << ans << std::endl;
 
