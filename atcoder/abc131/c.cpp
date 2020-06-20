@@ -75,5 +75,27 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll a,b,c,d;
+	std::cin >> a >> b >> c >> d;
+	
+	const ll lcm = lamlib::lcm(c,d);
+	
+	const ll n1 = b/c;
+	const ll n2 = b/d;
+	const ll n3 = b/lcm;
+	const ll tmp1 = n1 + n2 - n3;
+	std::cerr << n1 << " " << n2 << " " << n3 << std::endl;
+
+	const ll m1 = (a-1)/c;
+	const ll m2 = (a-1)/d;
+	const ll m3 = (a-1)/lcm;
+	const ll tmp2 = m1 + m2 - m3;
+	std::cerr << m1 << " " << m2 << " " << m3 << std::endl;
+
+	std::cerr << tmp1 << " " << tmp2 << std::endl;
+
+	const ll ans = (b-a+1) - (tmp1 - tmp2);
+	std::cout << ans << std::endl;
+	
 	return 0;
 }

@@ -26,7 +26,6 @@ namespace lamlib
 
 	/* algorithm */
 	ul gcd(const ul &a,const ul &b) { return (!b) ? a : gcd(b,a%b); }
-	ul lcm(const ul &a,const ul &b) { return (a/gcd(a,b))*b; } // a/gcd(a,b)*b <=> (a*b)/gcd(a,b)
 	std::vector<bool> eratosthenes(const ul &n)
 	{
 		std::vector<bool> prime_candidate(n,true);
@@ -75,5 +74,13 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ld a;
+	std::string b;
+	std::cin >> a >> b;
+
+	ll c = (b[0]-'0')*100 + (b[2]-'0')*10 + (b[3]-'0')*1;
+	std::cerr << c << std::endl;
+	std::cout << static_cast<ul>((a*c)/100) << std::endl;
+
 	return 0;
 }
