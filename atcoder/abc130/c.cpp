@@ -78,22 +78,8 @@ int main(int argc,char *argv[])
 	ll w,h,x,y;
 	std::cin >> w >> h >> x >> y;
 
-	// tate
-	ld tate = 0;
-	{
-		ll t_w = (x>(w-x)) ? x : (w-x);
-		tate = t_w * h;
-	}
-	// yoko
-	ld yoko = 0;
-	{
-		ll t_h = (y>(h-y)) ? y : (h-y);
-		yoko = w * t_h;
-	}
-
-
-	ld ans = (tate > yoko) ? yoko : tate;
-	bool judge = (tate == yoko) ? true : false;
+	ld ans = static_cast<ld>(w*h) / 2.0;
+	bool judge = (w == 2*x && h == 2*y) ? true : false;
 	
 	std::cout << std::fixed << std::setprecision(15) << ans << " " << judge << std::endl;
 
