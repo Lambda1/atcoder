@@ -75,5 +75,21 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll n,k;
+	std::cin >> n >> k;
+
+	std::vector<ll> p(n,0);
+	for(ll i = 0;i < n;++i) std::cin >> p[i];
+
+	std::sort(p.begin(), p.end());
+
+	ll ans = 0;
+	for(ll i = 0;i < k;++i)
+	{
+		ans += p[i];
+	}
+
+	std::cout << ans << std::endl;
+
 	return 0;
 }

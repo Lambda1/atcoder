@@ -75,5 +75,27 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll n;
+	std::cin >> n;
+	std::vector<ll> a(n,0);
+	for(ll i = 0;i < n;++i) std::cin >> a[i];
+
+	ll q;
+	std::cin >> q;
+	std::vector<ll> b(q,0), c(q,0);
+	for(ll i = 0;i < q;++i) std::cin >> b[i] >> c[i];
+
+	for(ll i = 0;i < q;++i)
+	{
+		for(ll j = 0;j < n;++j)
+		{
+			if(a[j] == b[i]) a[j] = c[i];
+		}
+
+		ll ans = 0;
+		for(ll i = 0;i < n;++i) ans += a[i];
+		std::cout << ans << std::endl;
+	}
+
 	return 0;
 }

@@ -75,5 +75,19 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	ll n;
+	std::cin >> n;
+	
+	std::string ans;
+	while(n > 0)
+	{
+		int tmp = (n-1)%26;
+		ans += ('a'+tmp);
+		n = (n-1)/26;
+	}
+
+	for(int i = ans.size()-1;i >= 0;--i) std::cout << ans[i];
+	std::cout << std::endl;
+
 	return 0;
 }

@@ -75,5 +75,11 @@ namespace lamlib
 
 int main(int argc,char *argv[])
 {
+	char a;
+	std::cin >> a;
+
+	if(a >= 'A' && a <= 'Z') std::cout << "A" << std::endl;
+	else std::cout << "a" << std::endl;
+
 	return 0;
 }
