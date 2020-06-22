@@ -102,8 +102,21 @@ ul fibonacci(const ul &n)
 
 int main(int argc,char *argv[])
 {
-	ul num;
-	std::cin >> num;
-	std::cout << fibonacci(num) << std::endl;
+	// 34: 5,702,887
+	ul max = 34;
+	std::cout << fibonacci(max) << std::endl;
+
+	ul ans = 0;
+	for(auto itr = fib_map.begin();itr != fib_map.end();++itr)
+	{
+		if((itr->second)%2 == 0 && itr->second < 4000000)
+		{
+			std::cout << itr->first+1 << ": " << itr->second << std::endl;
+			ans += (itr->second);
+		}
+	}
+
+	std::cout << ans << std::endl;
+
 	return 0;
 }
