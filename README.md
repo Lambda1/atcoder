@@ -4,8 +4,8 @@ Competitive programming
 Overview
 ---
 Competitive programming repository  
-[!atcoder](https://atcoder.jp/users/lambda00)  
-[!yukicoder](https://yukicoder.me/users/11300)  
+[atcoder](https://atcoder.jp/users/lambda00)  
+[yukicoder](https://yukicoder.me/users/11300)  
 
 ## Description
 競技プログラミング用のリポジトリ  
