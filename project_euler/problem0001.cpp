@@ -78,8 +78,14 @@ int main(int argc,char *argv[])
 {
 	ll ans = 0;
 
-	for(int i = 1;i < 1000;++i)
-		if(i%3 == 0 || i%5 == 0) ans += i;
+	ll max = 999;
+	auto func = [](const ll &max,const ll &base)
+	{
+		ll sum = 0;
+		for(ll i = 1;i <= max;++i) sum += (base*i);
+		return sum;
+	};
+	ans = func(max/3,3) + func(max/5,5) - func(max/15,15);
 	std::cout << ans << std::endl;
 
 	return 0;
