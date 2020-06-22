@@ -74,14 +74,36 @@ namespace lamlib
 
 // std::cout << std::fixed << std::setprecision(15) << std::endl;
 
-ll fibonacci(const ll &n)
+std::map<ul,ul> fib_map;
+ll fibo(const ul &n)
 {
-	if(n <= 1) { return 1; }
-	return fibonacci(n-2) + fibonacci(n-1);
+	if(n == 0 || n == 1) { return 1; }
+
+	if(fib_map.find(n-1) != fib_map.end())
+	{
+		if(fib_map.find(n-2) == fib_map.end()) fib_map[n-2] = fibo(n-2);
+	}
+	else
+	{
+		if(fib_map.find(n-2) != fib_map.end()) fib_map[n-1] = fibo(n-1);
+		else
+		{
+			fib_map[n-1] = fibo(n-1);
+			fib_map[n-2] = fibo(n-2);
+		}
+	}
+	return fib_map[n-1] + fib_map[n-2];
+}
+ul fibonacci(const ul &n)
+{
+	fib_map[0] = fib_map[1] = 1;
+	return fibo(n);
 }
 
 int main(int argc,char *argv[])
 {
-	std::cout << fibonacci(4000000) << std::endl;
+	ul num;
+	std::cin >> num;
+	std::cout << fibonacci(num) << std::endl;
 	return 0;
 }
