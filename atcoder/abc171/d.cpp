@@ -77,8 +77,18 @@ int main(int argc,char *argv[])
 {
 	ll n;
 	std::cin >> n;
-	std::vector<ll> a(n,0);
-	for(ll i = 0;i < n;++i) std::cin >> a[i];
+
+	ll ans = 0;
+
+	std::vector<ll> a(100000,0);
+	for(ll i = 0;i < n;++i)
+	{
+		ll tmp;
+		std::cin >> tmp;
+		++a[tmp];
+
+		ans += tmp;
+	}
 
 	ll q;
 	std::cin >> q;
@@ -87,14 +97,14 @@ int main(int argc,char *argv[])
 
 	for(ll i = 0;i < q;++i)
 	{
-		for(ll j = 0;j < n;++j)
-		{
-			if(a[j] == b[i]) a[j] = c[i];
-		}
-
-		ll ans = 0;
-		for(ll i = 0;i < n;++i) ans += a[i];
+		ll diff = c[i] - b[i];
+		ll cnt = diff * a[b[i]];
+		
+		ans += cnt;
 		std::cout << ans << std::endl;
+
+		a[c[i]] += a[b[i]];
+		a[b[i]] = 0;
 	}
 
 	return 0;
