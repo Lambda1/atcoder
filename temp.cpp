@@ -19,6 +19,7 @@ namespace lamlib
 {
 	/* constant */
 	constexpr double epsilon = std::numeric_limits<double>::epsilon();
+	constexpr double pi = std::acos(-1.0);
 
 	/* math */
 	template<class T> inline T abs(const T &a){ return (a>0) ? a : -a; }
