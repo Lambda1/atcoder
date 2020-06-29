@@ -86,14 +86,6 @@ ll solve(const std::vector<ll> &c, const std::vector<ll> &s, std::vector<ll> las
 	satisfaction -= decline;
 	return satisfaction;
 }
-ll decl(const std::vector<ll> &c, const std::vector<ll> &s, std::vector<ll> last, ll satisfaction, const ll &day, const ll &contest)
-{
-	satisfaction += s[day*type+contest];
-	last[contest] = day+1;
-	ll decline = 0;
-	for(ll j = 0;j < type;++j) decline += c[j]*(last[contest]-last[j]);
-	return decline;
-}
 
 int main(int argc,char *argv[])
 {
@@ -103,9 +95,10 @@ int main(int argc,char *argv[])
 	std::vector<ll> c(type, 0);
 	ll cs = 0;
 	for(ll i = 0;i < type;++i){ std::cin >> c[i]; cs += c[i];}
-	std::cerr << "max: " << cs << std::endl;
 	std::vector<ll> s(d*type, 0);
 	for(ll i = 0;i < d*type;++i) std::cin >> s[i];
+	
+	std::cerr << "max: " << cs << std::endl;
 
 	// output
 	std::vector<ll> last(type,0);
@@ -114,24 +107,27 @@ int main(int argc,char *argv[])
 	{
 		ll index = 0;
 		ll greed = solve(c,s,last,satisfaction,day,index);
-		ll decline = decl(c,s,last,satisfaction,day,index);
+		ll g_score = (1000000 + greed) > 0 ? (1000000 + greed) : 0;
 		for(ll contest = 1;contest < type;++contest)
 		{
 			ll tmp = solve(c,s,last,satisfaction,day,contest);
-			ll td = decl(c,s,last,satisfaction,day,contest);
-			std::cout << tmp << " " << td << std::endl;
-			if(tmp > greed && td < decline)
+			ll s_tmp = (1000000 + tmp) > 0 ? (1000000 + tmp) : 0;
+			if(s_tmp > g_score)
 			{
 				greed = tmp;
-				decline = td;
 				index = contest;
+				g_score = s_tmp;
 			}
 		}
+		greed = solve(c,s,last,satisfaction,day,index);
 		satisfaction = greed;
-		std::cout << "day " << day << " " << satisfaction << std::endl << std::endl;
-		if(day > 30) break;
+		last[index] = day+1;
+		score = g_score;
+		std::cerr << day << "-day" << " " << "contest: " << index << " " << satisfaction << " " << score << std::endl;
+		std::cout << index+1 << std::endl;
 	}
-
+	
+	score = (1000000 + satisfaction) > 0 ? (1000000 + satisfaction) : 0;
 	std::cerr << "satisfaction: " << satisfaction << std::endl;
 	std::cerr << "score: "<< score << std::endl;
 
